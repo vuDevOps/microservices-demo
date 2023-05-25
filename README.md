@@ -1,31 +1,31 @@
-[![Build Status](https://travis-ci.org/microservices-demo/microservices-demo.svg?branch=master)](https://travis-ci.org/microservices-demo/microservices-demo)
-
 # Sock Shop : A Microservice Demo Application
+## Updated: Installation Guide
+### Pre-requisites
+- Install Minikube
+- Install kubectl
+### Clone the microservices-demo repo
+```
+git clone https://github.com/vuDevOps/microservices-demo
+cd microservices-demo
+```
+### Start Minikube
+You can start Minikube by running:
+```
+minikube start --memory 8192 --cpus 4
+```
+### Deploy Sock Shop
+Deploy the Sock Shop application on Minikube
+```
+kubectl create -f deploy/kubernetes/manifests/00-sock-shop-ns.yaml -f deploy/kubernetes/manifests
+```
+To start Opentracing run the following command after deploying the sock shop
+```
+kubectl apply -f deploy/kubernetes/manifests-zipkin/zipkin-ns.yaml -f deploy/kubernetes/manifests-zipkin
+```
+Wait for all the Sock Shop services to start:
+```
+kubectl get pods --namespace="sock-shop
+```
+### Check the Sock Shop webpage
 
-The application is the user-facing part of an online shop that sells socks. It is intended to aid the demonstration and testing of microservice and cloud native technologies.
-
-It is built using [Spring Boot](http://projects.spring.io/spring-boot/), [Go kit](http://gokit.io) and [Node.js](https://nodejs.org/) and is packaged in Docker containers.
-
-You can read more about the [application design](./internal-docs/design.md).
-
-## Deployment Platforms
-
-The [deploy folder](./deploy/) contains scripts and instructions to provision the application onto your favourite platform. 
-
-Please let us know if there is a platform that you would like to see supported.
-
-## Bugs, Feature Requests and Contributing
-
-We'd love to see community contributions. We like to keep it simple and use Github issues to track bugs and feature requests and pull requests to manage contributions. See the [contribution information](.github/CONTRIBUTING.md) for more information.
-
-## Screenshot
-
-![Sock Shop frontend](https://github.com/microservices-demo/microservices-demo.github.io/raw/master/assets/sockshop-frontend.png)
-
-## Visualizing the application
-
-Use [Weave Scope](http://weave.works/products/weave-scope/) or [Weave Cloud](http://cloud.weave.works/) to visualize the application once it's running in the selected [target platform](./deploy/).
-
-![Sock Shop in Weave Scope](https://github.com/microservices-demo/microservices-demo.github.io/raw/master/assets/sockshop-scope.png)
-
-## 
+Once the application is deployed, navigate to http://192.168.99.100:30001 to see the Sock Shop home page
