@@ -50,6 +50,7 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: carts-db
@@ -117,6 +118,7 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: carts
@@ -161,6 +163,7 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: catalogue-db
@@ -208,6 +211,7 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: catalogue
@@ -261,6 +265,7 @@ spec:
         func: metrics
 
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: front-end
@@ -323,6 +328,7 @@ spec:
         func: svc
 
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: orders-db
@@ -389,6 +395,7 @@ spec:
         func: svc
 
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: orders
@@ -442,6 +449,7 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: payment
@@ -480,6 +488,7 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: queue-master
@@ -537,6 +546,7 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: rabbitmq
@@ -612,6 +622,7 @@ spec:
         func: svc
 
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: shipping
@@ -667,6 +678,7 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: user-db
@@ -726,6 +738,7 @@ spec:
         func: svc
 
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: user
