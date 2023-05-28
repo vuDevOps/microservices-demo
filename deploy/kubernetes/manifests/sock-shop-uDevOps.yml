@@ -48,7 +48,6 @@ spec:
             medium: Memory
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 ---
 apiVersion: v1
 kind: Service
@@ -119,7 +118,6 @@ spec:
             medium: Memory
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 ---
 apiVersion: v1
 kind: Service
@@ -167,7 +165,6 @@ spec:
               containerPort: 3306
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 ---
 apiVersion: v1
 kind: Service
@@ -218,7 +215,6 @@ spec:
             readOnlyRootFilesystem: true
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 ---
 apiVersion: v1
 kind: Service
@@ -340,7 +336,6 @@ spec:
             medium: Memory
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 
 ---
 apiVersion: v1
@@ -410,7 +405,6 @@ spec:
             medium: Memory
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 
 ---
 apiVersion: v1
@@ -468,7 +462,6 @@ spec:
             readOnlyRootFilesystem: true
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 ---
 apiVersion: v1
 kind: Service
@@ -510,7 +503,6 @@ spec:
             - containerPort: 80
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 ---
 apiVersion: v1
 kind: Service
@@ -571,7 +563,6 @@ spec:
             readOnlyRootFilesystem: true
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 ---
 apiVersion: v1
 kind: Service
@@ -649,7 +640,6 @@ spec:
             medium: Memory
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 
 ---
 apiVersion: v1
@@ -709,7 +699,6 @@ spec:
             medium: Memory
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 ---
 apiVersion: v1
 kind: Service
@@ -771,7 +760,6 @@ spec:
             readOnlyRootFilesystem: true
       nodeSelector:
         kubernetes.io/os: linux
-        func: svc
 
 ---
 apiVersion: v1
