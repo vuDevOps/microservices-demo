@@ -9,7 +9,6 @@ metadata:
   name: carts-db
   labels:
     name: carts-db
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -17,11 +16,10 @@ spec:
     metadata:
       labels:
         name: carts-db
-        version: v1
     spec:
       containers:
         - name: carts-db
-          image: mongo:3.4
+          image: mongo:5.0.11
           resources:
             limits:
               cpu: 2
@@ -49,7 +47,6 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: carts-db
@@ -72,7 +69,6 @@ metadata:
   name: carts
   labels:
     name: carts
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -80,7 +76,6 @@ spec:
     metadata:
       labels:
         name: carts
-        version: v1
     spec:
       containers:
         - name: carts
@@ -119,7 +114,6 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: carts
@@ -141,7 +135,6 @@ metadata:
   name: catalogue-db
   labels:
     name: catalogue-db
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -149,11 +142,10 @@ spec:
     metadata:
       labels:
         name: catalogue-db
-        version: v1
     spec:
       containers:
         - name: catalogue-db
-          image: weaveworksdemos/catalogue-db:0.3.0
+          image: weaveworksdemos/catalogue-db:0.3.5
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: fake_password
@@ -166,7 +158,6 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: catalogue-db
@@ -188,7 +179,6 @@ metadata:
   name: catalogue
   labels:
     name: catalogue
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -196,7 +186,6 @@ spec:
     metadata:
       labels:
         name: catalogue
-        version: v1
     spec:
       containers:
         - name: catalogue
@@ -216,7 +205,6 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: catalogue
@@ -238,7 +226,6 @@ metadata:
   name: front-end
   labels:
     name: front-end
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -246,7 +233,6 @@ spec:
     metadata:
       labels:
         name: front-end
-        version: v1
     spec:
       containers:
         - name: front-end
@@ -272,7 +258,6 @@ spec:
         func: metrics
 
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: front-end
@@ -300,7 +285,6 @@ metadata:
   name: orders-db
   labels:
     name: orders-db
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -308,11 +292,10 @@ spec:
     metadata:
       labels:
         name: orders-db
-        version: v1
     spec:
       containers:
         - name: orders-db
-          image: mongo:3.4
+          image: mongo:5.0.11
           ports:
             - name: mongo
               containerPort: 27017
@@ -337,7 +320,6 @@ spec:
         func: svc
 
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: orders-db
@@ -359,7 +341,6 @@ metadata:
   name: orders
   labels:
     name: orders
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -367,7 +348,6 @@ spec:
     metadata:
       labels:
         name: orders
-        version: v1
     spec:
       containers:
         - name: orders
@@ -406,7 +386,6 @@ spec:
         func: svc
 
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: orders
@@ -428,7 +407,6 @@ metadata:
   name: payment
   labels:
     name: payment
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -436,7 +414,6 @@ spec:
     metadata:
       labels:
         name: payment
-        version: v1
     spec:
       containers:
         - name: payment
@@ -462,7 +439,6 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: payment
@@ -484,7 +460,6 @@ metadata:
   name: queue-master
   labels:
     name: queue-master
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -492,7 +467,6 @@ spec:
     metadata:
       labels:
         name: queue-master
-        version: v1
     spec:
       containers:
         - name: queue-master
@@ -503,7 +477,6 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: queue-master
@@ -527,7 +500,6 @@ metadata:
   name: rabbitmq
   labels:
     name: rabbitmq
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -535,7 +507,6 @@ spec:
     metadata:
       labels:
         name: rabbitmq
-        version: v1
     spec:
       containers:
         - name: rabbitmq
@@ -563,7 +534,6 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: rabbitmq
@@ -594,7 +564,6 @@ metadata:
   name: shipping
   labels:
     name: shipping
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -602,7 +571,6 @@ spec:
     metadata:
       labels:
         name: shipping
-        version: v1
     spec:
       containers:
         - name: shipping
@@ -641,7 +609,6 @@ spec:
         func: svc
 
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: shipping
@@ -663,7 +630,6 @@ metadata:
   name: user-db
   labels:
     name: user-db
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -671,11 +637,10 @@ spec:
     metadata:
       labels:
         name: user-db
-        version: v1
     spec:
       containers:
         - name: user-db
-          image: weaveworksdemos/user-db:0.4.0
+          image: weaveworksdemos/user-db:0.4.7
           ports:
             - name: mongo
               containerPort: 27017
@@ -699,7 +664,6 @@ spec:
         kubernetes.io/os: linux
         func: svc
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: user-db
@@ -721,7 +685,6 @@ metadata:
   name: user
   labels:
     name: user
-    version: v1
   namespace: sock-shop
 spec:
   replicas: 1
@@ -729,7 +692,6 @@ spec:
     metadata:
       labels:
         name: user
-        version: v1
     spec:
       containers:
         - name: user
@@ -761,7 +723,6 @@ spec:
         func: svc
 
 ---
-apiVersion: v1
 kind: Service
 metadata:
   name: user
