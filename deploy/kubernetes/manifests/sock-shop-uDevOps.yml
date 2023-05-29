@@ -23,10 +23,6 @@ spec:
       containers:
         - name: carts-db
           image: mongo:5.0.11
-          resources:
-            limits:
-              cpu: 2
-              memory: 1024Mi
           ports:
             - name: mongo
               containerPort: 27017
@@ -634,11 +630,11 @@ spec:
           image: lillywu/sock-shop:shipping_0.1
           resources:
             limits:
-            cpu: 300m
-            memory: 500Mi
-          requests:
-            cpu: 100m
-            memory: 300Mi
+              cpu: 300m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 300Mi
           env:
             - name: ZIPKIN
               value: zipkin.jaeger.svc.cluster.local
