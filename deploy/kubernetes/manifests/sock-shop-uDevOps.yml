@@ -204,8 +204,11 @@ spec:
           image: lillywu/sock-shop:catalogue_0.1
           resources:
             limits:
-              cpu: 1
-              memory: 1024Mi
+              cpu: 200m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
           ports:
             - containerPort: 80
           securityContext:
@@ -268,9 +271,23 @@ spec:
               add:
                 - NET_ADMIN
             readOnlyRootFilesystem: true
+          env:
+            - name: SESSION_REDIS
+              value: "true"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8079
+            initialDelaySeconds: 300
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8079
+            initialDelaySeconds: 30
+            periodSeconds: 3
       nodeSelector:
         kubernetes.io/os: linux
-        func: metrics
 
 ---
 apiVersion: v1
@@ -376,8 +393,11 @@ spec:
           image: lillywu/sock-shop:orders_0.1
           resources:
             limits:
-              cpu: 1
-              memory: 1024Mi
+              cpu: 500m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 300Mi
           env:
             - name: ZIPKIN
               value: zipkin.jaeger.svc.cluster.local
@@ -445,8 +465,11 @@ spec:
           image: lillywu/sock-ship:payment_0.1
           resources:
             limits:
-              cpu: 1
-              memory: 1024Mi
+              cpu: 200m
+              memory: 200Mi
+            requests:
+              cpu: 99m
+              memory: 100Mi
           ports:
             - containerPort: 80
           securityContext:
@@ -611,8 +634,11 @@ spec:
           image: lillywu/sock-shop:shipping_0.1
           resources:
             limits:
-              cpu: 1
-              memory: 1024Mi
+            cpu: 300m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 300Mi
           env:
             - name: ZIPKIN
               value: zipkin.jaeger.svc.cluster.local
@@ -739,8 +765,11 @@ spec:
           image: lillywu/sock-shop:user_0.1
           resources:
             limits:
-              cpu: 1
-              memory: 1024Mi
+              cpu: 300m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
           ports:
             - containerPort: 80
           env:
