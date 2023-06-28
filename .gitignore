@@ -38,6 +38,8 @@ _testmain.go
 ### Java template
 /target/
 *.class
+# Ignore venv
+.venv
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

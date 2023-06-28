@@ -1,9 +1,10 @@
-version: '2'
+version: '3.9'
 
 services:
   front-end:
-    image: weaveworksdemos/front-end:0.3.12
+    image: azamikram22/front-end:latest
     hostname: front-end
+    container_name: front-end
     restart: always
     cap_drop:
       - all
@@ -25,27 +26,36 @@ services:
     tmpfs:
       - /var/run:rw,noexec,nosuid
     hostname: edge-router
+    container_name: edge-router
     restart: always
   catalogue:
-    image: weaveworksdemos/catalogue:0.3.5
+    # image: weaveworksdemos/catalogue:0.3.5
+    image: lillywu/sock-shop:catalogue_0.1
+    # image: azamikram22/catalogue:latest
     hostname: catalogue
+    container_name: catalogue
     restart: always
     cap_drop:
       - all
     cap_add:
       - NET_BIND_SERVICE
     read_only: true
+    depends_on:
+      catalogue-db: 
+        condition : service_started
   catalogue-db:
     image: weaveworksdemos/catalogue-db:0.3.0
     hostname: catalogue-db
+    container_name: catalogue-db
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
       - MYSQL_DATABASE=socksdb
   carts:
-    image: weaveworksdemos/carts:0.4.8
+    image: azamikram22/carts:latest
     hostname: carts
+    container_name: carts
     restart: always
     cap_drop:
       - all
@@ -59,6 +69,7 @@ services:
   carts-db:
     image: mongo:3.4
     hostname: carts-db
+    container_name: carts-db
     restart: always
     cap_drop:
       - all
@@ -70,8 +81,9 @@ services:
     tmpfs:
       - /tmp:rw,noexec,nosuid
   orders:
-    image: weaveworksdemos/orders:0.4.7
+    image: azamikram22/orders:latest
     hostname: orders
+    container_name: orders
     restart: always
     cap_drop:
       - all
@@ -85,6 +97,7 @@ services:
   orders-db:
     image: mongo:3.4
     hostname: orders-db
+    container_name: orders-db
     restart: always
     cap_drop:
       - all
@@ -98,6 +111,7 @@ services:
   shipping:
     image: weaveworksdemos/shipping:0.4.8
     hostname: shipping
+    container_name: shipping
     restart: always
     cap_drop:
       - all
@@ -111,6 +125,7 @@ services:
   queue-master:
     image: weaveworksdemos/queue-master:0.3.1
     hostname: queue-master
+    container_name: queue-master
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always
@@ -124,6 +139,7 @@ services:
   rabbitmq:
     image: rabbitmq:3.6.8
     hostname: rabbitmq
+    container_name: rabbitmq
     restart: always
     cap_drop:
       - all
@@ -134,8 +150,9 @@ services:
       - DAC_OVERRIDE
     read_only: true
   payment:
-    image: weaveworksdemos/payment:0.4.3
+    image: azamikram22/payment:latest
     hostname: payment
+    container_name: payment
     restart: always
     cap_drop:
       - all
@@ -143,8 +160,9 @@ services:
       - NET_BIND_SERVICE
     read_only: true
   user:
-    image: weaveworksdemos/user:0.4.4
+    image: azamikram22/user:latest
     hostname: user
+    container_name: user
     restart: always
     cap_drop:
       - all
@@ -156,6 +174,7 @@ services:
   user-db:
     image: weaveworksdemos/user-db:0.4.0
     hostname: user-db
+    container_name: user-db
     restart: always
     cap_drop:
       - all
@@ -172,4 +191,6 @@ services:
       - all
     read_only: true
     hostname: user-simulator
+    container_name: user-simulator
     command: "-d 60 -r 200 -c 2 -h edge-router"
+  
