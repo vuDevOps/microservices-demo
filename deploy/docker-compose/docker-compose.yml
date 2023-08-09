@@ -2,13 +2,16 @@ version: '3.9'
 
 services:
   front-end:
-    image: azamikram22/front-end:latest
+    # image: weaveworksdemos/front-end:0.3.12
+    # image: azamikram22/front-end:latest
+    image: lillywu/sock-shop:frontend_0.5
     hostname: front-end
     container_name: front-end
     restart: always
     cap_drop:
       - all
-    read_only: true
+    # read_only: true
+
   edge-router:
     image: weaveworksdemos/edge-router:0.1.1
     ports:
@@ -22,16 +25,17 @@ services:
       - SETGID
       - SETUID
       - DAC_OVERRIDE
-    read_only: true
+    # read_only: true
     tmpfs:
       - /var/run:rw,noexec,nosuid
     hostname: edge-router
     container_name: edge-router
     restart: always
+
   catalogue:
     # image: weaveworksdemos/catalogue:0.3.5
+    # image: azamikram22/catalogue:latest # Did not work
     image: lillywu/sock-shop:catalogue_0.1
-    # image: azamikram22/catalogue:latest
     hostname: catalogue
     container_name: catalogue
     restart: always
@@ -39,10 +43,13 @@ services:
       - all
     cap_add:
       - NET_BIND_SERVICE
-    read_only: true
+    # read_only: true
+    cpus: 1
+    mem_limit: 1024M
     depends_on:
       catalogue-db: 
         condition : service_started
+
   catalogue-db:
     image: weaveworksdemos/catalogue-db:0.3.0
     hostname: catalogue-db
@@ -52,8 +59,11 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
       - MYSQL_DATABASE=socksdb
+
   carts:
-    image: azamikram22/carts:latest
+    image: weaveworksdemos/carts:0.4.8
+    # image: azamikram22/carts:latest
+    # image: lillywu/sock-shop:carts_0.1
     hostname: carts
     container_name: carts
     restart: always
@@ -61,11 +71,14 @@ services:
       - all
     cap_add:
       - NET_BIND_SERVICE
-    read_only: true
+    # read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
       - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
+    cpus: 1
+    mem_limit: 1024M
+
   carts-db:
     image: mongo:3.4
     hostname: carts-db
@@ -77,11 +90,16 @@ services:
       - CHOWN
       - SETGID
       - SETUID
-    read_only: true
+    # read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid
+    cpus: 2
+    mem_limit: 1024M
+
   orders:
-    image: azamikram22/orders:latest
+    # image: weaveworksdemos/orders:0.4.7
+    # image: azamikram22/orders:latest
+    image: lillywu/sock-shop:orders_0.1
     hostname: orders
     container_name: orders
     restart: always
@@ -89,11 +107,14 @@ services:
       - all
     cap_add:
       - NET_BIND_SERVICE
-    read_only: true
+    # read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
       - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
+    cpus: 1
+    mem_limit: 1024M
+      
   orders-db:
     image: mongo:3.4
     hostname: orders-db
@@ -105,11 +126,13 @@ services:
       - CHOWN
       - SETGID
       - SETUID
-    read_only: true
+    # read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid
+
   shipping:
-    image: weaveworksdemos/shipping:0.4.8
+    # image: weaveworksdemos/shipping:0.4.8
+    image: lillywu/sock-shop:shipping_0.1
     hostname: shipping
     container_name: shipping
     restart: always
@@ -117,11 +140,14 @@ services:
       - all
     cap_add:
       - NET_BIND_SERVICE
-    read_only: true
+    # read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid
     environment:
       - JAVA_OPTS=-Xms64m -Xmx128m -XX:+UseG1GC -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
+    cpus: 1
+    mem_limit: 1024M
+  
   queue-master:
     image: weaveworksdemos/queue-master:0.3.1
     hostname: queue-master
@@ -133,9 +159,10 @@ services:
       - all
     cap_add:
       - NET_BIND_SERVICE
-    read_only: true
+    # read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid
+
   rabbitmq:
     image: rabbitmq:3.6.8
     hostname: rabbitmq
@@ -148,9 +175,12 @@ services:
       - SETGID
       - SETUID
       - DAC_OVERRIDE
-    read_only: true
+    # read_only: true
+
   payment:
-    image: azamikram22/payment:latest
+    # image: weaveworksdemos/payment:0.4.3
+    # image: azamikram22/payment:latest
+    image: lillywu/sock-ship:payment_0.1
     hostname: payment
     container_name: payment
     restart: always
@@ -158,9 +188,14 @@ services:
       - all
     cap_add:
       - NET_BIND_SERVICE
-    read_only: true
+    # read_only: true
+    cpus: 1
+    mem_limit: 1024M
+
   user:
-    image: azamikram22/user:latest
+    # image: weaveworksdemos/user:0.4.4
+    # image: azamikram22/user:latest
+    image: lillywu/sock-shop:user_0.1
     hostname: user
     container_name: user
     restart: always
@@ -168,9 +203,12 @@ services:
       - all
     cap_add:
       - NET_BIND_SERVICE
-    read_only: true
+    # read_only: true
     environment:
       - MONGO_HOST=user-db:27017
+    cpus: 1
+    mem_limit: 1024M
+
   user-db:
     image: weaveworksdemos/user-db:0.4.0
     hostname: user-db
@@ -182,15 +220,14 @@ services:
       - CHOWN
       - SETGID
       - SETUID
-    read_only: true
+    # read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid
   user-sim:
     image: weaveworksdemos/load-test:0.1.1
     cap_drop:
       - all
-    read_only: true
+    # read_only: true
     hostname: user-simulator
     container_name: user-simulator
     command: "-d 60 -r 200 -c 2 -h edge-router"
-  
